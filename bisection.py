@@ -1,14 +1,14 @@
 #===============================================================================
 # Description:
-# Finds the root of a function between a specified interval using the bisection 
-# method.
+# Finds the root of an example function between a specified interval using the 
+# bisection method.
 #===============================================================================
 # Author: Alan Robledo
 #===============================================================================
 import math
 
 def func(xin):
-    return 3*xin - math.exp(xin)
+    return xin - 2**(-xin)
 
 def bisection(a, b, tol):
     i = 0
@@ -32,9 +32,9 @@ def bisection(a, b, tol):
     return c, counter
 
 print """We're gonna find the root for
-f(x) = 3x - e^x
-on [1,2] with a tolerance of 10^-6."""
-a = 1.0
+f(x) = x - 2^-x
+on [0,2] with a tolerance of 10^-6."""
+a = 0.0
 b = 2.0
 print "\nUsing the bisection method,"
 tol = 10**-6
