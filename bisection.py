@@ -1,3 +1,10 @@
+#===============================================================================
+# Description:
+# Finds the root of a function between a specified interval using the bisection 
+# method.
+#===============================================================================
+# Author: Alan Robledo
+#===============================================================================
 import math
 
 def func(xin):
