@@ -1,3 +1,10 @@
+#===============================================================================
+# Description:
+# Finds the root of an example function between a specified interval using 
+# Newton's method.
+#===============================================================================
+# Author: Alan Robledo
+#===============================================================================
 import math
 
 def func(xin):
