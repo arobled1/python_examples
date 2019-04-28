@@ -1,3 +1,11 @@
+#===============================================================================
+# Description:
+# Generates a list of 25 numbers and plots each number.
+# Coordinates for plotting are made by making each random number the y
+# coordinate and the order in which the number is generated the x coordinate.
+#===============================================================================
+# Author: Alan Robledo
+#===============================================================================
 x = range(1,26)
 y = []
 for i in x:
