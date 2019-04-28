@@ -1,3 +1,10 @@
+#===============================================================================
+# Description:
+# Finds the root of an example function between a specified interval using
+# the method of false position.
+#===============================================================================
+# Author: Alan Robledo
+#===============================================================================
 import math
 
 def func(xin):
