@@ -2,6 +2,10 @@
 # Description:
 # Finds the root of an example function between a specified interval using
 # the method of false position.
+# The values for the 2 initial approximation a_o and a_1 must be chosen such
+# that f(a_o) * f(a_1) < 0.
+# Therefore, the values for 2 initial approximations are taken to be:
+#	a_o = 0 , a_1 = 2
 #===============================================================================
 # Author: Alan Robledo
 #===============================================================================
