@@ -17,7 +17,8 @@ def func(xin):
 def bisection(a, b, tol):
     i = 0
     counter = 0
-    while i == 0:
+    max_iterations = 100
+    while i <= max_iterations:
         counter = counter + 1
         c = (a + b)/2.0
         fa = func(a)
@@ -28,7 +29,10 @@ def bisection(a, b, tol):
         elif fb == 0:
             print "Your value for right interval turned out to be the root of the function"
         elif fc == 0 or (b-a)/2.0 < tol:
-            i = 1
+            i = max_iterations + 1
+	elif counter == max_iterations:
+	    print "Uh oh, you've reached the maximum number of iterations."
+	    i = max_iterations + 1
         if fa*fc > 0:
             a = c
         else:
