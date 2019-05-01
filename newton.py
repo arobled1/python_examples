@@ -20,13 +20,17 @@ def func_prime(xin):
 def newton(a, tol):
         i = 0
         counter = 0
-        while i == 0:
+	max_iterations = 100
+        while i <= max_iterations:
             counter = counter + 1
             fa = func(a)
             fa_prime = func_prime(a)
             a_new = a - fa / fa_prime
             if abs(a_new - a) < tol:
-                i = 1
+                i = max_iterations + 1
+	    elif counter == max_iterations:
+		print "Uh oh, you've reached the maximum number of iterations."
+                i = max_iterations + 1
             else:
                 a = a_new
         return a, counter
