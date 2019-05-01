@@ -23,11 +23,15 @@ def false(a0, a1, tol):
     fa1 = func(a1)
     i = 0
     counter = 0
-    while i == 0:
+    max_iterations = 100
+    while i <= max_iterations:
         counter = counter + 1
         a2 = a1 - (fa1 * (a1 - a0) ) / (fa1 - fa0)
         if abs(a2 - a1) < tol:
-            i = 1
+            i = max_iterations + 1
+     	elif counter == max_iterations:
+	    print "Uh oh, you've reached the maximum number of iterations."
+	    i = max_iterations + 1
         else:
             fa2 = func(a2)
             if fa2*fa1 < 0:
