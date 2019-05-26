@@ -16,9 +16,9 @@
 import numpy as np
 from numpy import linalg as la
 
-def generate_grid(xbound, ngrid):
-    dx = (2.0 * xbound) / (ngrid - 1)
-    x_grid = [-xbound + i * dx for i in xrange(ngrid)]
+def generate_grid(xmin, xmax, ngrid):
+    dx = (xmax - xmin) / (ngrid - 1)
+    x_grid = [xmin + i * dx for i in xrange(ngrid)]
     return dx, x_grid
 
 def get_kinetic(ngrid, dx):
@@ -42,12 +42,14 @@ def get_potential(ngrid):
 d_well = 2
 hbar = 1
 mass = 1
-omegax = -1
+omegax = 1
 
-xbound = 12
+xmin = -2.0
+xmax = 12.0
 ngrid = 300
-dx, x_grid = generate_grid(xbound, ngrid)
+dx, x_grid = generate_grid(xmin, xmax, ngrid)
 ke_matrix = get_kinetic(ngrid, dx)
 pe_matrix = get_potential(ngrid)
 hamiltonian = ke_matrix + pe_matrix
 eig_val, eig_vec = la.eig(hamiltonian)
+print eig_val
