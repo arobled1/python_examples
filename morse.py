@@ -10,15 +10,18 @@
 # ngrid = number of grid points
 # dx = dist. between points (Remember: for every ngrid points, there
 #       are ngrid - 1 dx)
+# d_well = depth of the morse potential well
+# mass = reduced mass
 #===============================================================================
 import numpy as np
+from numpy import linalg as la
 
 def generate_grid(xbound, ngrid):
     dx = (2.0 * xbound) / (ngrid - 1)
     x_grid = [-xbound + i * dx for i in xrange(ngrid)]
     return dx, x_grid
 
-def get_kinetic(ngrid):
+def get_kinetic(ngrid, dx):
     ke_matrix = np.zeros((ngrid, ngrid))
     ke_matrix[0][0] = -2
     ke_matrix[1][0] = 1
@@ -28,17 +31,23 @@ def get_kinetic(ngrid):
         ke_matrix[i - 1][i] = 1
         ke_matrix[i][i] = -2
         ke_matrix[i + 1][i] = 1
-    return ke_matrix
+    return -(hbar**2 / (2.0 * mass)) * dx**-2 * ke_matrix
 
 def get_potential(ngrid):
     pe_matrix = np.zeros((ngrid, ngrid))
     for i in xrange(ngrid):
-        pe_matrix[i][i] = (np.exp(-x_grid[i]) - 1)**2
+        pe_matrix[i][i] = d_well * (np.exp(-omegax * x_grid[i]) - 1)**2
     return pe_matrix
 
-xbound = 10
-ngrid = 2000
-dx, x_grid = generate_grid(xbound, ngrid)
+d_well = 1
+hbar = 1
+mass = 1
+omegax = 1
 
-ke_matrix = get_kinetic(ngrid)
+xbound = 10
+ngrid = 200
+dx, x_grid = generate_grid(xbound, ngrid)
+ke_matrix = get_kinetic(ngrid, dx)
 pe_matrix = get_potential(ngrid)
+hamiltonian = ke_matrix + pe_matrix
+eig_val, eig_vec = la.eig(hamiltonian)
