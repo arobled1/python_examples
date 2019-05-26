@@ -30,8 +30,15 @@ def get_kinetic(ngrid):
         ke_matrix[i + 1][i] = 1
     return ke_matrix
 
-xbound = 50
+def get_potential(ngrid):
+    pe_matrix = np.zeros((ngrid, ngrid))
+    for i in xrange(ngrid):
+        pe_matrix[i][i] = (np.exp(-x_grid[i]) - 1)**2
+    return pe_matrix
+
+xbound = 10
 ngrid = 2000
 dx, x_grid = generate_grid(xbound, ngrid)
 
 ke_matrix = get_kinetic(ngrid)
+pe_matrix = get_potential(ngrid)
