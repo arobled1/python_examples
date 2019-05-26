@@ -1,6 +1,6 @@
-#===============================================================================
+#=============================================================================80
 # Description:
-# Finds the root of an example function between a specified interval using 
+# Finds the root of an example function between a specified interval using
 # Newton's method.
 #===============================================================================
 # Author: Alan Robledo
