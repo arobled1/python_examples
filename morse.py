@@ -1,9 +1,9 @@
 #=============================================================================80
 # Description:
-# Computing the hamiltonian for a morse oscillator on a 1D grid.
+# Computing the hamiltonian for a 1D morse oscillator.
 #===============================================================================
 # Author: Alan Robledo
-# Date modified: May 25, 2019
+# Date modified: May 26, 2019
 #===============================================================================
 # Variables:
 # xbound = sets the bound in the positive and negative direction
@@ -39,13 +39,13 @@ def get_potential(ngrid):
         pe_matrix[i][i] = d_well * (np.exp(-omegax * x_grid[i]) - 1)**2
     return pe_matrix
 
-d_well = 1
+d_well = 2
 hbar = 1
 mass = 1
-omegax = 1
+omegax = -1
 
-xbound = 10
-ngrid = 200
+xbound = 12
+ngrid = 300
 dx, x_grid = generate_grid(xbound, ngrid)
 ke_matrix = get_kinetic(ngrid, dx)
 pe_matrix = get_potential(ngrid)
