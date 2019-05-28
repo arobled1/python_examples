@@ -15,6 +15,7 @@
 #===============================================================================
 import numpy as np
 from numpy import linalg as la
+import matplotlib.pyplot as plt
 
 def generate_grid(xmin, xmax, ngrid):
     dx = (xmax - xmin) / (ngrid - 1)
@@ -39,12 +40,12 @@ def get_potential(ngrid):
         pe_matrix[i][i] = d_well * (np.exp(-omegax * x_grid[i]) - 1)**2
     return pe_matrix
 
-d_well = 2
+d_well = 12
 hbar = 1
 mass = 1
-omegax = 1
+omegax = 0.2041241
 
-xmin = -2.0
+xmin = -4.0
 xmax = 12.0
 ngrid = 300
 dx, x_grid = generate_grid(xmin, xmax, ngrid)
@@ -53,3 +54,19 @@ pe_matrix = get_potential(ngrid)
 hamiltonian = ke_matrix + pe_matrix
 eig_val, eig_vec = la.eig(hamiltonian)
 print eig_val
+ground = [eig_vec[i][0] for i in xrange(ngrid)]
+first_exc = [eig_vec[i][1] for i in xrange(ngrid)]
+sec_exc = [eig_vec[i][2] for i in xrange(ngrid)]
+third_exc = [eig_vec[i][3] for i in xrange(ngrid)]
+potential = [d_well * (np.exp(-omegax * x_grid[i]) - 1)**2 for i in xrange(ngrid)]
+plt.xlim(min(x_grid) - 0.2, max(x_grid) + 0.2)
+plt.ylim(min(ground) - 0.2, max(third_exc) + 0.2)
+plt.plot(x_grid, ground, label='n = 0')
+plt.plot(x_grid, first_exc, label='n = 1')
+plt.plot(x_grid, sec_exc, label='n = 2')
+plt.plot(x_grid, third_exc, label='n = 3')
+plt.xlabel("x")
+plt.ylabel("psi")
+plt.legend(loc='best')
+plt.savefig("wavefunctions.pdf")
+plt.clf()
