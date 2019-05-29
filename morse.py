@@ -44,29 +44,36 @@ d_well = 12
 hbar = 1
 mass = 1
 omegax = 0.2041241
-
-xmin = -4.0
-xmax = 12.0
+xmin = -5.0
+xmax = 11.1
 ngrid = 300
+
 dx, x_grid = generate_grid(xmin, xmax, ngrid)
 ke_matrix = get_kinetic(ngrid, dx)
 pe_matrix = get_potential(ngrid)
 hamiltonian = ke_matrix + pe_matrix
 eig_val, eig_vec = la.eig(hamiltonian)
-print eig_val
-ground = [eig_vec[i][0] for i in xrange(ngrid)]
-first_exc = [eig_vec[i][1] for i in xrange(ngrid)]
-sec_exc = [eig_vec[i][2] for i in xrange(ngrid)]
-third_exc = [eig_vec[i][3] for i in xrange(ngrid)]
+ground = [eig_vec[i][0] - 0.3 for i in xrange(ngrid)]
+first_exc = [eig_vec[i][1] - 0.1 for i in xrange(ngrid)]
+sec_exc = [eig_vec[i][2] + 0.1 for i in xrange(ngrid)]
+third_exc = [eig_vec[i][3] + 0.3 for i in xrange(ngrid)]
+fourth_exc = [eig_vec[i][4] + 0.5 for i in xrange(ngrid)]
 potential = [d_well * (np.exp(-omegax * x_grid[i]) - 1)**2 for i in xrange(ngrid)]
-plt.xlim(min(x_grid) - 0.2, max(x_grid) + 0.2)
-plt.ylim(min(ground) - 0.2, max(third_exc) + 0.2)
+plt.xlim(min(x_grid) - 0.1, max(x_grid) + 0.1)
+plt.ylim(min(ground) - 0.1, max(fourth_exc) + 0.1)
+plt.yticks([])
 plt.plot(x_grid, ground, label='n = 0')
 plt.plot(x_grid, first_exc, label='n = 1')
 plt.plot(x_grid, sec_exc, label='n = 2')
 plt.plot(x_grid, third_exc, label='n = 3')
+plt.plot(x_grid, fourth_exc, label='n = 4')
 plt.xlabel("x")
 plt.ylabel("psi")
-plt.legend(loc='best')
+plt.legend()
 plt.savefig("wavefunctions.pdf")
 plt.clf()
+f = open('eigenvalues.dat', 'wb')
+f.write("n       E_n\n")
+for i in xrange(ngrid):
+    f.write("%s %s\n" % (i, eig_val[i]))
+f.close()
