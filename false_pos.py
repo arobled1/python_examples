@@ -29,9 +29,9 @@ def false(a0, a1, tol):
         a2 = a1 - (fa1 * (a1 - a0) ) / (fa1 - fa0)
         if abs(a2 - a1) < tol:
             i = max_iterations + 1
-     	elif counter == max_iterations:
-	    print "Uh oh, you've reached the maximum number of iterations."
-	    i = max_iterations + 1
+        elif counter == max_iterations:
+	        print("Uh oh, you've reached the maximum number of iterations.")
+	        i = max_iterations + 1
         else:
             fa2 = func(a2)
             if fa2*fa1 < 0:
@@ -42,14 +42,14 @@ def false(a0, a1, tol):
     return a2, counter
 
 
-print """We're gonna find the root for
+print("""We're gonna find the root for
 f(x) = x - 2^-x
 with an initial solution of p_o = 0 and p_1 = 2
-and a tolerance of 10**-5."""
+and a tolerance of 10**-5.""")
 a0 = 0.0
 a1 = 2.0
-print "\nUsing the false position method,"
+print("\nUsing the false position method,")
 tol = 10**-5
 root, counter = false(a0, a1, tol)
-print "The calculated root is: ", root
-print "# of iterations: ", counter
+print("The calculated root is: ", root)
+print("# of iterations: ", counter)
