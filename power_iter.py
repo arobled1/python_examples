@@ -1,3 +1,18 @@
+#=============================================================================80
+# Description:
+# Finds the dominant eigenvalue and associated eigenvector of a square matrix 
+# A of size NxN using the Power Method, aka Power Iteration. 
+# The user must specify an intial vector to represent the dominant eigenvector.
+# The initial vector is usually chosen to be an array of ones or some unit
+# vector (e.g. [1 0 0]).
+#===============================================================================
+# Author: Alan Robledo
+# Date: 9/26/19
+#===============================================================================
+# Output:
+# Dominant eigenvalue is: 6.006711409395972
+# Dominant eigenvector is: [ 1.          0.71452514 -0.24915656]
+#===============================================================================
 import numpy as np
 
 max_iter = 20  # Max number of iterations (set by user)
@@ -8,10 +23,13 @@ tol = 10**-3   # Tolerance (set by user)
 # -5 13 0
 # -1 0  2
 mat = np.array([[-4,14,0],[-5,13,0],[-1,0,2]])
+
 # Example column vector:
 # [1 1 1]^T
 init_vec = np.array([1, 1, 1])
+
 xp = abs(max(init_vec, key=abs))  # Finding l-infinity norm of initial vector x
+
 # Rescaling the initial vector to prevent from blowing up
 init_vec = init_vec / xp
 
